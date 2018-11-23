@@ -1,19 +1,23 @@
 package ru.future.savyak.dominator228;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class Music extends AppCompatActivity {
 
+    private static final String TAG = Music.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_music);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -22,7 +26,7 @@ public class Music extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Куку из крск", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -49,4 +53,35 @@ public class Music extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+
 }
