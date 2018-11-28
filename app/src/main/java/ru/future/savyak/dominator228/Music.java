@@ -10,8 +10,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Music extends AppCompatActivity {
+
+    TrackAdapter adapter;
+    TrackGenerator generator = new TrackGenerator();
 
     private static final String TAG = Music.class.getSimpleName();
 
@@ -22,6 +27,8 @@ public class Music extends AppCompatActivity {
         setContentView(R.layout.activity_music);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        initList();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,5 +91,12 @@ public class Music extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void initList(){
+        RecyclerView rvTracks = findViewById(R.id.rvTrack);
+        rvTracks.setHasFixedSize(true);
+        rvTracks.setLayoutManager(new GridLayoutManager(this, 2));
+        adapter = new TrackAdapter(generator.getTracks(10));
+        rvTracks.setAdapter(adapter);
 
+    }
 }
