@@ -32,4 +32,9 @@ public class TrackGenerator {
         }
         return people;
     }
+
+    public String getImageLink(){
+        return images[random.nextInt(images.length)];
+    }
+
 }
