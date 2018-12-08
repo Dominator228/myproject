@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -13,10 +12,6 @@ import android.widget.ImageView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class AddTrackActivity extends AppCompatActivity {
 
@@ -52,8 +47,9 @@ public class AddTrackActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_add_person, menu);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.activity_add_track, menu);
+        return super.onCreateOptionsMenu(menu)
+;
     }
 
     @Override
@@ -62,8 +58,8 @@ public class AddTrackActivity extends AppCompatActivity {
             String name = tilName.getEditText().getText().toString();
 
 
-            Track person = new Track(name, ivImage);
-            AppDatabase.getInstance(this).personDao().insertPerson(person);
+            Track person = new Track(name, "",avatarLink);
+            //AppDatabase.getInstance(this).personDao().insertPerson(person);
             finish();
             return true;
         } else {
@@ -78,6 +74,6 @@ public class AddTrackActivity extends AppCompatActivity {
                 .error(R.drawable.ic_launcher_background)
                 .fit()
                 .centerCrop()
-                .into();
+                .into(ivImage);
     }
 }

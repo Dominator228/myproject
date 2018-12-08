@@ -3,16 +3,23 @@ package ru.future.savyak.dominator228;
 
 import java.util.Objects;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "Tracks")
 public class Track {
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
     private String path;
     private String image;
 
+    @Ignore
     public Track(String name, String path, String image) {
         this(0, name, path, image);
     }
-
+    @Ignore
     public Track(long id, String name, String path, String image) {
         this.id = id;
         this.name = name;
