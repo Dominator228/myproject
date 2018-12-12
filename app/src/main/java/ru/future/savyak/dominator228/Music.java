@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.List;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +42,16 @@ public class Music extends AppCompatActivity {
         });
     }
 
+    private void updateList() {
+        List<Track> tracks = AppDatabase.getInstance(this).TrackDao().getAll();
+        adapter.update(tracks);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart");
+        updateList();
     }
 
     @Override
@@ -73,7 +82,10 @@ public class Music extends AppCompatActivity {
         RecyclerView rvTracks = findViewById(R.id.rvTrack);
         rvTracks.setHasFixedSize(true);
         rvTracks.setLayoutManager(new GridLayoutManager(this, 2));
-        adapter = new TrackAdapter(generator.getTracks(10));
+        List<Track> tracks = AppDatabase.getInstance(this).TrackDao().getAll();
+        adapter = new TrackAdapter(tracks, item -> {
+            Toast.makeText(this, item.getName(), Toast.LENGTH_LONG).show();
+        });
         rvTracks.setAdapter(adapter);
 
     }

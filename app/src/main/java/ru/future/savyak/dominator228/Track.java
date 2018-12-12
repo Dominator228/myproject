@@ -15,10 +15,11 @@ public class Track {
     private String path;
     private String image;
 
-    @Ignore
-    public Track(String name, String path, String image) {
+
+    public Track(String name, String path, String image){
         this(0, name, path, image);
     }
+
     @Ignore
     public Track(long id, String name, String path, String image) {
         this.id = id;

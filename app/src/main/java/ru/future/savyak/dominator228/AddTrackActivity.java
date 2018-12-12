@@ -58,8 +58,8 @@ public class AddTrackActivity extends AppCompatActivity {
             String name = tilName.getEditText().getText().toString();
 
 
-            Track person = new Track(name, "",avatarLink);
-            //AppDatabase.getInstance(this).personDao().insertPerson(person);
+            Track track = new Track(name, "",avatarLink);
+            AppDatabase.getInstance(this).TrackDao().insertTrack(track);
             finish();
             return true;
         } else {
