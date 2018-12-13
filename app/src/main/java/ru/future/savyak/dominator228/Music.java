@@ -84,7 +84,8 @@ public class Music extends AppCompatActivity {
         rvTracks.setLayoutManager(new GridLayoutManager(this, 2));
         List<Track> tracks = AppDatabase.getInstance(this).TrackDao().getAll();
         adapter = new TrackAdapter(tracks, item -> {
-            Toast.makeText(this, item.getName(), Toast.LENGTH_LONG).show();
+            final Intent intent = TrackDetails.getStartIntent(this, item.getId());
+            startActivity(intent);
         });
         rvTracks.setAdapter(adapter);
 
