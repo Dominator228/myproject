@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class AddTrackActivity extends AppCompatActivity {
@@ -38,7 +40,7 @@ public class AddTrackActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            Track person = generator.getPerson();
+            Track person = generator.getTrack();
             loadImage(person.getImage());
             tilName.getEditText().setText(person.getName());
 
@@ -74,6 +76,16 @@ public class AddTrackActivity extends AppCompatActivity {
                 .error(R.drawable.ic_launcher_background)
                 .fit()
                 .centerCrop()
-                .into(ivImage);
+                .into(ivImage, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("Image loaded", avatarLink);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("Image error", avatarLink, e);
+                    }
+                });
     }
 }

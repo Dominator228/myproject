@@ -19,6 +19,8 @@ public class TrackDetails extends AppCompatActivity {
     private FloatingActionButton fab;
     private MediaPlayer mediaPlayer;
     private PlayerState playerState;
+    private Track track;
+    private TrackGenerator generator = new TrackGenerator();
 
     public static Intent getStartIntent(Context context, long personId) {
         return new Intent(context, TrackDetails.class).putExtra(EXTRA_TRACK_ID, personId);
@@ -61,7 +63,7 @@ public class TrackDetails extends AppCompatActivity {
     }
 
     private void startPlayer() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.believer);
+        mediaPlayer = MediaPlayer.create(this, generator.getSong(track.getName()));
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(mp -> stopPlayer());
         playerState = PlayerState.STARTED;
@@ -87,14 +89,14 @@ public class TrackDetails extends AppCompatActivity {
         TextView tvName = findViewById(R.id.tvName);
 
         final long personId = getIntent().getLongExtra(EXTRA_TRACK_ID, 0);
-        final Track person = AppDatabase.getInstance(this).TrackDao().getById(personId);
-        Picasso.get().load(person.getImage())
+        track = AppDatabase.getInstance(this).TrackDao().getById(personId);
+        Picasso.get().load(track.getImage())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .fit()
                 .centerCrop()
                 .into(ivAvatar);
-        tvName.setText(person.getName());
+        tvName.setText(track.getName());
     }
 
     private enum PlayerState {
